@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+    <style>
+        #canvas {
+            border: 1px solid gray;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+<script type="text/javascript">
+    var canvas = new fabric.Canvas('canvas');
+
+    var text = new fabric.IText("Sample", {
+        top: 10,
+        left: 10,
+        fontSize: 16,
+        fontFamily: 'verdana',
+        fill: 'purple'
+    })
+
+    canvas.add(text);
+</script>
+
+</html>

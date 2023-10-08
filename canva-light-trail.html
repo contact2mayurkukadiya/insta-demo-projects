@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Light Trail</title>
+    <style>
+        body {
+            background-color: #000000;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id='world'></canvas>
+</body>
+
+<script>
+
+    function animate() {
+        loop();
+        requestAnimationFrame(animate);
+    }
+
+    // One of my first <canvas> experiments, woop! :D 
+
+    var SCREEN_WIDTH = window.innerWidth;
+    var SCREEN_HEIGHT = window.innerHeight;
+
+    var RADIUS = 70;
+
+    var RADIUS_SCALE = 1;
+    var RADIUS_SCALE_MIN = 1;
+    var RADIUS_SCALE_MAX = 1.5;
+
+    var QUANTITY = 1;
+
+    var canvas;
+    var context;
+    var particle = {
+        size: 0,
+        position: { x: mouseX, y: mouseY },
+        speed: 1,
+        targetSize: 20,
+        fillColor: '#1BFFFF',
+    };
+    var isMouseMoving = false;
+    var mouseMoveTimeout;
+    var mouseX = SCREEN_WIDTH * 0.5;
+    var mouseY = SCREEN_HEIGHT * 0.5;
+    var mouseIsDown = false;
+    var colors = [
+        '#1BFFFF',
+        '#2E3192',
+        '#D4145A',
+        '#FBB03B',
+        '#009245',
+        '#FCEE21',
+        '#ED1E79',
+        '#EE9CA7'
+    ]
+
+    function init() {
+
+        canvas = document.getElementById('world');
+
+        if (canvas && canvas.getContext) {
+            context = canvas.getContext('2d');
+
+            // Register event listeners
+            window.addEventListener('mousemove', documentMouseMoveHandler, false);
+            window.addEventListener('resize', windowResizeHandler, false);
+
+            windowResizeHandler();
+
+            animate();
+        }
+    }
+
+    function documentMouseMoveHandler(event) {
+        if (!isMouseMoving) {
+            // Mouse movement has resumed
+            isMouseMoving = true;
+            clearTimeout(mouseMoveTimeout);
+        }
+
+        mouseX = event.clientX - (window.innerWidth - SCREEN_WIDTH) * .5;
+        mouseY = event.clientY - (window.innerHeight - SCREEN_HEIGHT) * .5;
+
+        particle.size = 20;
+        clearTimeout(mouseMoveTimeout);
+        mouseMoveTimeout = setTimeout(() => {
+            isMouseMoving = false;
+            particle.size = 0;
+            particle.fillColor = colors[Math.floor(Math.random() * colors.length)];
+        }, 100);
+    }
+
+    function windowResizeHandler() {
+        SCREEN_WIDTH = window.innerWidth;
+        SCREEN_HEIGHT = window.innerHeight;
+
+        canvas.width = SCREEN_WIDTH;
+        canvas.height = SCREEN_HEIGHT;
+    }
+
+    function loop() {
+
+        // Clear the canvas
+        context.fillStyle = 'rgba(0,0,0,0.15)';
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+
+        var lp = { x: particle.position.x, y: particle.position.y };
+
+        particle.position.x = mouseX;
+        particle.position.y = mouseY;
+
+        context.beginPath();
+        context.lineJoin = "round";
+        context.shadowColor = particle.fillColor; // Set the shadow color to match the particle color
+        context.shadowBlur = 10;
+        context.fillStyle = particle.fillColor;
+        context.strokeStyle = particle.fillColor;
+        context.lineWidth = particle.size;
+        context.moveTo(lp.x, lp.y);
+        context.lineTo(particle.position.x, particle.position.y);
+        context.stroke();
+        context.arc(particle.position.x, particle.position.y, particle.size / 2, 0, Math.PI * 2, true);
+        context.fill();
+        context.shadowColor = "transparent";
+        context.shadowBlur = 0;
+        context.closePath();
+    }
+
+    window.onload = init;
+</script>
+
+</html>
