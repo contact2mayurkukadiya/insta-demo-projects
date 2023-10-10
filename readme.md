@@ -1,10 +1,10 @@
-# Project Name
+# Instagram Sample Projects
 
 Sample Javascript Mini Projects
 
 ## Table of Contents
 
-- [Project Name](#project-name)
+- [Instagram Sample Projects](#instagram-sample-projects)
   - [Table of Contents](#table-of-contents)
   - [Demo](#demo)
   - [Installation](#installation)
