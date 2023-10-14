@@ -1,12 +1,13 @@
 {
     "manifest_version": 3,
-    "name": "Canva Asset Downloader",
+    "name": "Asset Downloader",
     "version": "1.0.0",
     "permissions": [
         "activeTab",
         "scripting",
         "tabs",
         "downloads",
+        "storage",
         "webNavigation"
     ],
     "host_permissions": [
@@ -35,7 +36,8 @@
         }
     ],
     "action": {
-        "default_title": "Asana - Trial Remover"
+        "default_title": "Asset Downloader",
+        "default_popup": "popup.html"
     },
     "icons": {
         "16": "images/icon16.png",

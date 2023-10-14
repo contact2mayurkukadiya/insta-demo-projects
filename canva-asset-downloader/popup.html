@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" type="module"></script>
+</head>
+
+<body>
+    <div class="solid-title">
+        <h1>Asset Downloader</h1>
+    </div>
+    <form class="form-container" id="form">
+        <div class="form-group">
+            <label for="inputBox" class="mb-2">Container Element:</label>
+            <input type="text" id="containerInput" value=".uPeMFQ" name="inputBox">
+        </div>
+        <!-- <div class="form-group">
+            <label for="inputBox" class="mb-2">Thumbnail Container Element:</label>
+            <input type="text" id="thumbnailContainerInput" value=".mh2TGQ" name="inputBox">
+        </div> -->
+        <div class="form-group flex align-item-center">
+            <input type="checkbox" id="isAutoDownload" />
+            <label for="isAutoDownload" class="cursor-pointer">Auto Download On Page Load</label>
+        </div>
+        <div class="form-group">
+            <button type="button" class="d-none" id="download">Download</button>
+        </div>
+    </form>
+</body>
+
+</html>
