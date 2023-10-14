@@ -6,6 +6,7 @@
         "activeTab",
         "scripting",
         "tabs",
+        "downloads",
         "webNavigation"
     ],
     "host_permissions": [
@@ -28,7 +29,8 @@
                 "http://*/*"
             ],
             "js": [
-                "jszip.min.js"
+                "jszip.min.js",
+                "content_script.js"
             ]
         }
     ],
